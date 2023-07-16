@@ -13,8 +13,13 @@ def get_stock_price(symbol):
         response = requests.get(url)
         data = response.json()
         print(data)
-        stock_price = data['Global Quote']['05. price']
-        return stock_price
+        stock_data = data['Global Quote']
+        stock_price = stock_data['05. price']
+        change = round(float(stock_data['09. change']), 2)
+        changePercent = round(float(stock_data['10. change percent'][:-1]), 2)
+        high = round(float(stock_data['03. high']), 2)
+        low = round(float(stock_data['04. low']), 2)
+        return stock_price, change, changePercent, high, low
     except (requests.RequestException, KeyError) as e:
         print(f"Error retrieving stock price: {e}")
 
@@ -28,7 +33,7 @@ def index():
 
 @app.route('/stock-price/<symbol>')
 def stock_price(symbol):
-    price = get_stock_price(symbol)
+    price, change, changePercent, high, low = get_stock_price(symbol)
 
     if price:
         cleaned_price = re.sub('[^0-9.]', '', price)
@@ -39,7 +44,7 @@ def stock_price(symbol):
         font = Figlet(font='colossal')
         ascii_price = font.renderText(spaced_price)
 
-        return render_template('stock_price.html', ascii_price=ascii_price, stock_symbol=symbol)
+        return render_template('stock_price.html', ascii_price=ascii_price, stock_symbol=symbol, change=change, changePercent=changePercent, high=high, low=low)
     else:
         return 'Error retrieving stock price'
 
