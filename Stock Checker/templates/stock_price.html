@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Price</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+
+        .rainbow-text {
+            background: linear-gradient(45deg, #ff6767, #ffaa63, 	#f3fb6f, #90fd58, #79fffc, rgb(167, 77, 227), rgb(245, 106, 245));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 4s linear infinite;
+            letter-spacing: -1px;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            color:#fff
+        }
+
+        h2 {
+            color:#fff
+        } 
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Stock Price</h1>
+    <h2>{{ stock_symbol }}</h2>
+    <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
+    <a class="button" href="/">Go Back</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Price Update</title>
+    <style>
+        .ascii-art {
+            font-family: monospace;
+            font-size: 24px;
+            white-space: pre-wrap;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Price Update</h1>
+    <div class="ascii-art" id="stockPrice"></div>
+
+    <script>
+        // Function to fetch the stock price from the server
+        function getStockPrice() {
+            // Replace the URL with the local web server URL
+            fetch('/stock-price')
+                .then(response => response.text())
+                .then(asciiPrice => {
+                    // Update the stock price element with the received ASCII art
+                    document.getElementById('stockPrice').innerHTML = asciiPrice;
+                })
+                .catch(error => {
+                    console.error('Error retrieving stock price:', error);
+                });
+        }
+
+        // Call the getStockPrice function when the page is loaded or refreshed
+        window.onload = getStockPrice;
+        window.onbeforeunload = getStockPrice;
+    </script>
+</body>
+</html>
