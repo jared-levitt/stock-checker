@@ -22,23 +22,74 @@
         }
 
         h1 {
-            color:#fff
+            color: #fff;
         }
 
         h2 {
-            color:#fff
+            color: #fff;
+            display: inline;
         } 
-        
+
+        pre {
+            margin-bottom: -20px;
+        }
+
+        .button {
+           font-family: monospace;
+           background-color: blueviolet;
+           color: #fff; 
+           border-radius: 10%;
+           height: 20px;
+           margin-top: 30px;
+           margin-right: 10px;
+           padding: 10px 20px;
+           font-size: 18px;
+           align-content: center;
+           width: fit-content;
+           text-decoration: none;
+        }
+
         .button:hover {
             background-color: #45a049;
+        }
+
+        .arrow-up-right:before {
+            content: "\2197";
+            color: #90fd58;
+            margin-left: 5px;
+        }
+
+        .arrow-down-right:before {
+            content: "\2198";
+            color: #ff6767;
+            margin-left: 5px;
         }
 
     </style>
 </head>
 <body>
     <h1>Stock Price</h1>
-    <h2>{{ stock_symbol }}</h2>
+    <h2>
+        <span style="text-transform: uppercase;">{{ stock_symbol }}</span>&nbsp;
+        {% if changePercent|float > 0.0 %}
+            <span class="arrow-up-right"></span>
+        {% else %}
+            <span class="arrow-down-right"></span>
+        {% endif %}
+        &nbsp;
+        <span style="color:gray;" id="last-updated"></span>
+    </h2>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
-    <a class="button" href="/">Go Back</a>
+    <h2 class="change">{{ change }}&nbsp;</h2>
+    <h2 class="changePercent">&#40;<span style="color: {% if changePercent|float > 0.0 %}#90fd58{% elif changePercent|float < 0.0 %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&#41;&nbsp;</h2>
+    <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;</span>&nbsp;{{ high }}&nbsp;</h2>
+    <h2 class="low"><span style="color: #ff6767; font-size: 24px;">&#11015;</span>&nbsp;{{ low }}&nbsp;</h2>
+    <div style="display: block;">
+        <h2>&nbsp;</h2>
+        <br>
+        <a class="button" href="javascript:location.reload(true)">Refresh Price</a>
+        <a class="button" href="/">Change Stock</a>
+    </div>
 </body>
 </html>
