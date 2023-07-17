@@ -1,4 +1,5 @@
 import requests
+import finnhub
 from flask import Flask, render_template, request, redirect, url_for
 from pyfiglet import Figlet
 import re
@@ -6,19 +7,19 @@ import re
 app = Flask(__name__)
 
 def get_stock_price(symbol):
-    api_key = 'T0R7REUTTRQP4F4V'  # Replace with your Alpha Vantage API key
-    url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={api_key}'
+    api_key = 'ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g'  # Replace with your Finnhub API key
+    url = f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={api_key}'
 
     try:
         response = requests.get(url)
         data = response.json()
         print(data)
-        stock_data = data['Global Quote']
-        stock_price = stock_data['05. price']
-        change = round(float(stock_data['09. change']), 2)
-        changePercent = round(float(stock_data['10. change percent'][:-1]), 2)
-        high = round(float(stock_data['03. high']), 2)
-        low = round(float(stock_data['04. low']), 2)
+        stock_data = data
+        stock_price = stock_data['c']
+        change = round(float(stock_data['d']), 2)
+        changePercent = round(float(stock_data['dp'][:-1]), 2)
+        high = round(float(stock_data['h']), 2)
+        low = round(float(stock_data['l']), 2)
         return stock_price, change, changePercent, high, low
     except (requests.RequestException, KeyError) as e:
         print(f"Error retrieving stock price: {e}")
