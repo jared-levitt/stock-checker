@@ -69,26 +69,20 @@
     <h1>Stock Price</h1>
     <h2>
         <span style="text-transform: uppercase;">{{ stock_symbol }}</span>&nbsp;
-        {% if changePercent|float > 0.0 %}
-            <span class="arrow-up-right">&#8599;&#xFE0E</span>
-        {% else %}
-            <span class="arrow-down-right">&#8600;&#xFE0E</span>
-        {% endif %}
-        &nbsp;
+        <span id="arrow"></span>&nbsp;
         <span style="color:gray;" id="last-updated"></span>
     </h2>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='socket.io.js') }}"></script>
+    <script src="{{ url_for('static', filename='websocket.js') }}"></script>
     <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
-    <h2 class="change">{{ change }}&nbsp;</h2>
-    <h2 class="changePercent">&#40;<span style="color: {% if changePercent|float > 0.0 %}#90fd58{% elif changePercent|float < 0.0 %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&#41;&nbsp;</h2>
-    <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span>&nbsp;{{ high }}&nbsp;</h2>
-    <h2 class="low"><span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span>&nbsp;{{ low }}&nbsp;</h2>
+    <h2 id="price" class="change"></h2>
+    <h2 id="change" class="changePercent"></h2>
+    <h2 id="high"></h2>
+    <h2 id="low"></h2>
     <div style="display: block;">
         <h2>&nbsp;</h2>
         <br>
-        <a class="button" href="javascript:location.reload(true)">Refresh Price</a>
         <a class="button" href="/">Change Stock</a>
     </div>
 </body>
-    <script src="{{ url_for('static', filename='websocket.js') }}"></script>
 </html>
