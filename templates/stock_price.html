@@ -74,10 +74,10 @@
         <span style="color:gray;" id="last-updated"></span>
     </h2>
     <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
-    <h2 class="change">Change: {{ change }}&nbsp;</h2>
-    <h2 class="changePercent">Change Percent: <span style="color: {% if changePercent|float > 0.0 %}#90fd58{% else %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&nbsp;</h2>
-    <h2 class="high">High: <span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> {{ high }}&nbsp;</h2>
-    <h2 class="low">Low: <span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span> {{ low }}&nbsp;</h2>
+    <h2 class="change">{{ change }}&nbsp;</h2>
+    <h2 class="changePercent"><span style="color: {% if changePercent|float > 0.0 %}#90fd58{% else %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&nbsp;</h2>
+    <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> {{ high }}&nbsp;</h2>
+    <h2 class="low"><span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span> {{ low }}&nbsp;</h2>
     <div style="display: block;">
         <h2>&nbsp;</h2>
         <br>
