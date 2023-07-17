@@ -4,7 +4,7 @@ import re
 from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO
 from datetime import datetime
-
+from pyfiglet import Figlet
 import finnhub
 
 finnhub_client = finnhub.Client(api_key="ciqqfbhr01qjff7ctobgciqqfbhr01qjff7ctoc0")
