@@ -7,7 +7,7 @@ from flask_socketio import SocketIO
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SECRET_KEY'] = 'ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g'
 socketio = SocketIO(app)
 scheduler = BackgroundScheduler(daemon=True)
 finnhub_client = finnhub.Client(api_key="your-finnhub-api-key")
