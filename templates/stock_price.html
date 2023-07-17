@@ -54,13 +54,13 @@
         }
 
         .arrow-up-right:before {
-            content: '\2197' '&#xFE0E;';
+            content: '\2197;&#xFE0E';
             color: #90fd58;
             margin-left: 5px;
         }
 
         .arrow-down-right:before {
-            content: '\2198' '&#xFE0E;';
+            content: '\2198;&#xFE0E';
             color: #ff6767;
             margin-left: 5px;
         }
@@ -72,9 +72,9 @@
     <h2>
         <span style="text-transform: uppercase;">{{ stock_symbol }}</span>&nbsp;
         {% if changePercent|float > 0.0 %}
-            <span class="arrow-up-right"></span>
+            <span class="arrow-up-right"></span>&#xFE0E;
         {% else %}
-            <span class="arrow-down-right"></span>
+            <span class="arrow-down-right"></span>&#xFE0E;
         {% endif %}
         &nbsp;
         <span style="color:gray;" id="last-updated"></span>
