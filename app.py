@@ -58,7 +58,11 @@ def index():
 @app.route('/stock-price/<symbol>')
 def stock_price(symbol):
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
-    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time)
+    stock_price, change, changePercent, high, low = get_stock_price(symbol)
+    if stock_price:
+        return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, change=change, changePercent=changePercent, high=high, low=low)
+    else:
+        return 'Error retrieving stock price'
 
 @socketio.on('connect')
 def handle_connect():
