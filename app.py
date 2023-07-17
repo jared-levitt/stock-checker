@@ -37,13 +37,8 @@ def stock_price(symbol):
     price, change, changePercent, high, low = get_stock_price(symbol)
 
     if price:
-        cleaned_price = re.sub('[^0-9.]', '', price)
-        cleaned_price = cleaned_price[:-2]
-        
-        spaced_price = ' '.join(cleaned_price)
-        
         font = Figlet(font='colossal')
-        ascii_price = font.renderText(spaced_price)
+        ascii_price = font.renderText(str(price))
 
         return render_template('stock_price.html', ascii_price=ascii_price, stock_symbol=symbol, change=change, changePercent=changePercent, high=high, low=low)
     else:
