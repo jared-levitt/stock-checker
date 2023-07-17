@@ -25,15 +25,24 @@ def get_stock_price(symbol):
         changePercent = round(float(data['dp']), 2)
         high = round(float(data['h']), 2)
         low = round(float(data['l']), 2)
-        return stock_price, change, changePercent, high, low
+
+        if stock_price:
+            formatted_price = re.sub('[^0-9.]', '', str(stock_price))
+            spaced_price = ' '.join(formatted_price)
+
+            font = Figlet(font='colossal')
+            ascii_price = font.renderText(spaced_price)
+
+            return stock_price, change, changePercent, high, low, ascii_price
+        else:
+            return None, None, None, None, None, None
+
     except Exception as e:
         print(f"Error retrieving stock price: {e}")
-        return None, None, None, None, None
+        return None, None, None, None, None, None
 
 def emit_stock_update():
-    global stock_symbol
-
-    stock_price, change, changePercent, high, low = get_stock_price(stock_symbol)
+    stock_price, change, changePercent, high, low, ascii_price = get_stock_price(stock_symbol)
     last_updated = time.strftime("%d/%m/%Y %H:%M")
 
     socketio.emit('stock_update', {
@@ -42,7 +51,8 @@ def emit_stock_update():
         'changePercent': changePercent,
         'high': high,
         'low': low,
-        'lastUpdated': last_updated
+        'lastUpdated': last_updated,
+        'asciiPrice': ascii_price
     }, broadcast=True)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -58,9 +68,10 @@ def index():
 @app.route('/stock-price/<symbol>')
 def stock_price(symbol):
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
-    stock_price, change, changePercent, high, low = get_stock_price(symbol)
+    stock_price, change, changePercent, high, low, ascii_price = get_stock_price(symbol)
+
     if stock_price:
-        return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, change=change, changePercent=changePercent, high=high, low=low)
+        return render_template('stock_price.html', ascii_price=ascii_price, stock_symbol=symbol, change=change, changePercent=changePercent, high=high, low=low, current_time=current_time)
     else:
         return 'Error retrieving stock price'
 
