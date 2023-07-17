@@ -5,23 +5,18 @@ from pyfiglet import Figlet
 import re
 
 app = Flask(__name__)
+finnhub_client = finnhub.Client(api_key="ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g")
 
 def get_stock_price(symbol):
-    api_key = 'ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g'  # Replace with your Finnhub API key
-    url = f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={api_key}'
-
     try:
-        response = requests.get(url)
-        data = response.json()
-        print(data)
-        stock_data = data
-        stock_price = stock_data['c']
-        change = round(float(stock_data['d']), 2)
-        changePercent = round(float(stock_data['dp']), 2)
-        high = round(float(stock_data['h']), 2)
-        low = round(float(stock_data['l']), 2)
+        response = finnhub_client.quote(symbol)
+        stock_price = response['c']
+        change = round(float(response['d']), 2)
+        changePercent = round(float(response['dp']), 2)
+        high = round(float(response['h']), 2)
+        low = round(float(response['l']), 2)
         return stock_price, change, changePercent, high, low
-    except (requests.RequestException, KeyError) as e:
+    except Exception as e:
         print(f"Error retrieving stock price: {e}")
 
 @app.route('/', methods=['GET', 'POST'])
