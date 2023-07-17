@@ -8,7 +8,7 @@
         }
 
         .rainbow-text {
-            background: linear-gradient(45deg, #ff6767, #ffaa63, 	#f3fb6f, #90fd58, #79fffc, rgb(167, 77, 227), rgb(245, 106, 245));
+            background: linear-gradient(45deg, #ff6767, #ffaa63, #f3fb6f, #90fd58, #79fffc, rgb(167, 77, 227), rgb(245, 106, 245));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: rainbow 4s linear infinite;
@@ -54,13 +54,13 @@
         }
 
         .arrow-up-right:before {
-            content: "\2197";
+            content: "\2197&#xFE0E";
             color: #90fd58;
             margin-left: 5px;
         }
 
         .arrow-down-right:before {
-            content: "\2198";
+            content: "\2198&#xFE0E";
             color: #ff6767;
             margin-left: 5px;
         }
@@ -83,8 +83,8 @@
     <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
     <h2 class="change">{{ change }}&nbsp;</h2>
     <h2 class="changePercent">&#40;<span style="color: {% if changePercent|float > 0.0 %}#90fd58{% elif changePercent|float < 0.0 %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&#41;&nbsp;</h2>
-    <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;</span>&nbsp;{{ high }}&nbsp;</h2>
-    <h2 class="low"><span style="color: #ff6767; font-size: 24px;">&#11015;</span>&nbsp;{{ low }}&nbsp;</h2>
+    <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span>&nbsp;{{ high }}&nbsp;</h2>
+    <h2 class="low"><span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span>&nbsp;{{ low }}&nbsp;</h2>
     <div style="display: block;">
         <h2>&nbsp;</h2>
         <br>
