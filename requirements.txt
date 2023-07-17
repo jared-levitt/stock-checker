@@ -3,4 +3,5 @@ Gunicorn
 Requests
 pyfiglet
 finnhub-python
-flask-socketio
+flask_socketio
+apscheduler.schedulers.background
