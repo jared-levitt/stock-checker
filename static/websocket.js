@@ -25,7 +25,6 @@ function updateStockData(data) {
     const lastUpdatedElement = document.querySelector('#last-updated');
     
 
-    priceElement.textContent = price;
     changeElement.textContent = `Change: ${change}`;
     changePercentElement.innerHTML = `Change Percent: <span style="color: ${changePercent > 0 ? '#90fd58' : '#ff6767'};">${changePercent}%</span>`;
     highElement.innerHTML = `High: <span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> ${high}`;
