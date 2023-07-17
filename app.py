@@ -1,6 +1,6 @@
 import requests
 import finnhub
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from pyfiglet import Figlet
 import re
 from flask_socketio import SocketIO
