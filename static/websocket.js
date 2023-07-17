@@ -14,15 +14,16 @@ socket.on('stock_update', (data) => {
 });
 
 function updateStockData(data) {
-    const { price, change, changePercent, high, low, lastUpdated } = data;
+    const { price, change, changePercent, high, low, lastUpdated, asciiPrice } = data;
 
     // Update stock price and change
-    const priceElement = document.querySelector('.rainbow-text');
+    const asciiPriceElement = document.querySelector('#ascii-price');
     const changeElement = document.querySelector('.change');
     const changePercentElement = document.querySelector('.changePercent');
     const highElement = document.querySelector('.high');
     const lowElement = document.querySelector('.low');
     const lastUpdatedElement = document.querySelector('#last-updated');
+    
 
     priceElement.textContent = price;
     changeElement.textContent = `Change: ${change}`;
@@ -30,4 +31,5 @@ function updateStockData(data) {
     highElement.innerHTML = `High: <span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> ${high}`;
     lowElement.innerHTML = `Low: <span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span> ${low}`;
     lastUpdatedElement.textContent = `Last Updated: ${lastUpdated}`;
+    asciiPriceElement.textContent = asciiPrice;
 }
