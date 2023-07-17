@@ -3,3 +3,4 @@ Gunicorn
 Requests
 pyfiglet
 finnhub-python
+flask-socketio
