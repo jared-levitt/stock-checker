@@ -13,7 +13,6 @@
             -webkit-text-fill-color: transparent;
             animation: rainbow 4s linear infinite;
             letter-spacing: -1px;
-            margin-bottom: -20px;
         }
 
         @keyframes rainbow {
@@ -74,7 +73,9 @@
         &nbsp;
         <span style="color:gray;" id="last-updated">{{ current_time }}</span>
     </h2>
+    <div style="margin-bottom:-40px;">
     <pre><code class="rainbow-text">{{ ascii_price }}</code></pre>
+    </div>
     <h2 class="change">{{ change }}&nbsp;</h2>
     <h2 class="changePercent"><span style="color: {% if changePercent|float > 0.0 %}#90fd58{% else %}#ff6767{% endif %};">{{ changePercent }}&#37;</span>&nbsp;</h2>
     <h2 class="high"><span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> {{ high }}&nbsp;</h2>
