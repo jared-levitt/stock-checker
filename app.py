@@ -7,7 +7,7 @@ from datetime import datetime
 
 import finnhub
 
-finnhub_client = finnhub.Client(api_key="ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g")
+finnhub_client = finnhub.Client(api_key="ciqqfbhr01qjff7ctobgciqqfbhr01qjff7ctoc0")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
