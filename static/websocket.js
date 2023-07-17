@@ -9,18 +9,25 @@ socket.on('disconnect', () => {
 });
 
 socket.on('stock_update', (data) => {
-    // Handle the received stock update data
     console.log('Received stock update:', data);
-
-    // Update the stock price on the page
-    document.getElementById('stock-price').textContent = data.price;
-    document.getElementById('change').textContent = data.change;
-    document.getElementById('change-percent').textContent = data.changePercent;
-    document.getElementById('high').textContent = data.high;
-    document.getElementById('low').textContent = data.low;
+    updateStockData(data);
 });
 
-socket.on('time_update', (data) => {
-    // Update the last updated time on the page
-    document.getElementById('last-updated').textContent = data.lastUpdated;
-});
+function updateStockData(data) {
+    const { price, change, changePercent, high, low, lastUpdated } = data;
+
+    // Update stock price and change
+    const priceElement = document.querySelector('.rainbow-text');
+    const changeElement = document.querySelector('.change');
+    const changePercentElement = document.querySelector('.changePercent');
+    const highElement = document.querySelector('.high');
+    const lowElement = document.querySelector('.low');
+    const lastUpdatedElement = document.querySelector('#last-updated');
+
+    priceElement.textContent = price;
+    changeElement.textContent = `Change: ${change}`;
+    changePercentElement.innerHTML = `Change Percent: <span style="color: ${changePercent > 0 ? '#90fd58' : '#ff6767'};">${changePercent}%</span>`;
+    highElement.innerHTML = `High: <span style="color: #90fd58; font-size: 24px;">&#11014;&#xFE0E</span> ${high}`;
+    lowElement.innerHTML = `Low: <span style="color: #ff6767; font-size: 24px;">&#11015;&#xFE0E</span> ${low}`;
+    lastUpdatedElement.textContent = `Last Updated: ${lastUpdated}`;
+}
