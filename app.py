@@ -17,7 +17,7 @@ def get_stock_price(symbol):
         stock_data = data
         stock_price = stock_data['c']
         change = round(float(stock_data['d']), 2)
-        changePercent = round(float(stock_data['dp'][:-1]), 2)
+        changePercent = round(float(stock_data['dp']), 2)
         high = round(float(stock_data['h']), 2)
         low = round(float(stock_data['l']), 2)
         return stock_price, change, changePercent, high, low
