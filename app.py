@@ -6,12 +6,15 @@ from flask_socketio import SocketIO
 from datetime import datetime
 
 import finnhub
+
 finnhub_client = finnhub.Client(api_key="ciqmtm9r01qjff7crg10ciqmtm9r01qjff7crg1g")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 
 socketio = SocketIO(app)
+
+stock_symbol = None
 
 def get_stock_price(symbol):
     try:
@@ -28,6 +31,8 @@ def get_stock_price(symbol):
         return None, None, None, None, None
 
 def emit_stock_update():
+    global stock_symbol
+
     stock_price, change, changePercent, high, low = get_stock_price(stock_symbol)
     last_updated = time.strftime("%d/%m/%Y %H:%M")
 
@@ -53,9 +58,7 @@ def index():
 @app.route('/stock-price/<symbol>')
 def stock_price(symbol):
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
-    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time,ascii_price=ascii_price, stock_symbol=symbol, change=change, changePercent=changePercent, high=high, low=low)
-    else:
-        return 'Error retrieving stock price'
+    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time)
 
 @socketio.on('connect')
 def handle_connect():
