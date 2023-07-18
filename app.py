@@ -77,7 +77,17 @@ def index():
 def stock_price(symbol):
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
     stock_price, change, changePercent, high, low = get_stock_price(symbol)
-    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, stock_price=stock_price, change=change, changePercent=changePercent, high=high, low=low)
+
+    if stock_price is not None:
+        formatted_price = re.sub('[^0-9.]', '', str(stock_price))
+        spaced_price = ' '.join(formatted_price)
+
+        font = Figlet(font='colossal')
+        ascii_price = font.renderText(spaced_price)
+
+        return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, stock_price=ascii_price, change=change, changePercent=changePercent, high=high, low=low)
+    else:
+        return 'Error retrieving stock price'
 
 @socketio.on('connect')
 def handle_connect():
