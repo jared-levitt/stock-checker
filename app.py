@@ -55,12 +55,12 @@ def emit_stock_update():
         ascii_price = font.renderText(spaced_price)
 
         socketio.emit('stock_update', {
-            'price': ascii_price,
+            'ascii_price': ascii_price,
             'change': change,
             'changePercent': changePercent,
             'high': high,
             'low': low,
-            'lastUpdated': last_updated
+            'last_updated': last_updated
         }, broadcast=True)
 
 @app.route('/', methods=['GET', 'POST'])
