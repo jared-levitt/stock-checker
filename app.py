@@ -31,10 +31,16 @@ def get_stock_price(symbol):
         changePercent = round(float(data['dp']), 2)
         high = round(float(data['h']), 2)
         low = round(float(data['l']), 2)
+        
+        formatted_price = re.sub('[^0-9.]', '', str(stock_price))
+        spaced_price = ' '.join(formatted_price)
+
+        font = Figlet(font='colossal')
+        ascii_price = font.renderText(spaced_price)
 
         # Update cache with new data and last update time
         cache[symbol] = {
-            'data': (stock_price, change, changePercent, high, low),
+            'data': (ascii_price, change, changePercent, high, low),
             'last_updated': time.time()
         }
 
@@ -55,7 +61,7 @@ def emit_stock_update():
         ascii_price = font.renderText(spaced_price)
 
         socketio.emit('stock_update', {
-            'price': ascii_price,
+            'ascii_price': ascii_price,
             'change': change,
             'changePercent': changePercent,
             'high': high,
@@ -77,7 +83,7 @@ def index():
 def stock_price(symbol):
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
     stock_price, change, changePercent, high, low = get_stock_price(symbol)
-    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, stock_price=stock_price, change=change, changePercent=changePercent, high=high, low=low)
+    return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, ascii_price=ascii_price, change=change, changePercent=changePercent, high=high, low=low)
 
 @socketio.on('connect')
 def handle_connect():
