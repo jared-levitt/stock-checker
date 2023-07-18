@@ -14,7 +14,7 @@ socket.on('stock_update', (data) => {
 });
 
 function updateStockData(data) {
-    const { price, change, changePercent, high, low, lastUpdated, asciiPrice } = data;
+    const { price, change, changePercent, high, low, last_updated, ascii_price } = data;
 
     // Update stock price and change
     const asciiPriceElement = document.querySelector('#ascii-price');
