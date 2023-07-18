@@ -40,7 +40,7 @@ def get_stock_price(symbol):
 
         # Update cache with new data and last update time
         cache[symbol] = {
-            'data': (ascii_price, change, changePercent, high, low),
+            'data': (stock_price, change, changePercent, high, low),
             'last_updated': time.time()
         }
 
