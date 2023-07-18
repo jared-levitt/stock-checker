@@ -85,7 +85,7 @@ def stock_price(symbol):
         font = Figlet(font='colossal')
         ascii_price = font.renderText(spaced_price)
 
-        return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, stock_price=ascii_price, change=change, changePercent=changePercent, high=high, low=low)
+        return render_template('stock_price.html', stock_symbol=symbol, current_time=current_time, ascii_price=ascii_price, change=change, changePercent=changePercent, high=high, low=low)
     else:
         return 'Error retrieving stock price'
 
