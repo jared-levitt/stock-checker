@@ -10,7 +10,7 @@ import finnhub
 
 finnhub_client = finnhub.Client(api_key="ciqqfbhr01qjff7ctobgciqqfbhr01qjff7ctoc0")
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = os.urandom(24)
 
 socketio = SocketIO(app)
