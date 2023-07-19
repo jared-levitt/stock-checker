@@ -5,3 +5,4 @@ Flask-SocketIO
 finnhub-python
 pyfiglet
 requests
+python-socketio
